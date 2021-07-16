@@ -1,7 +1,6 @@
 // Dependencies
 const express = require('express');
 const logger = require('morgan');   // Morgan for console loggin requests 
-const path = require("path");
 const mongoose = require('mongoose');
 
 const app = express();
@@ -14,13 +13,12 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Connect & require routes
-require('./routes/api-routes')(app, path);
-require('./routes/html-routes')(app, path);
+require('./routes/api-routes')(app);
+require('./routes/html-routes')(app);
 
 // Mongoose => mongo.db
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', {
-    useNewUrlParser: true
-});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', { useNewUrlParser: true });
+
 app.listen(PORT, () => {
     console.log(`App running on port localhost://${PORT}`);
 });
