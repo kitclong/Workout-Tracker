@@ -16,8 +16,16 @@ app.use(express.static('public'));
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
 
-// Mongoose => mongo.db
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workout', { useNewUrlParser: true });
+// Mongoose => mongo.db Attempt to use env first, if running on heroku it will find it and use it
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://localhost/workout-db',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    }
+);
 
 app.listen(PORT, () => {
     console.log(`App running on port localhost://${PORT}`);
