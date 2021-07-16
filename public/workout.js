@@ -48,7 +48,6 @@ function totalWorkout(workout) {
   workout.exercises.forEach((exercise) => {
     total += exercise.duration;
   })
-  console.log(total);
   return total;
 }
 
